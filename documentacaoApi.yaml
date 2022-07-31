@@ -1,0 +1,179 @@
+openapi: 3.0.1
+info:
+  title: Teste Backend
+  description: Documentação de APIs teste Backend
+  version: v1.0
+servers:
+  - url: http://localhost:8080/
+    description: Generated server url
+tags:
+  - name: Lead
+    description: Endpoints Leads
+
+paths:
+  /leads:
+    get:
+      description: Listar todos os Leads
+      tags:
+        - Lead
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/leadsAllResponse'
+    post:
+      description: Criar um novo Lead
+      tags:
+        - Lead
+      operationId: criaLead
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/leadRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/leadResponse'
+
+
+  /leads/{id}:
+    get:
+      description: Pegar dados de um lead especifico
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      tags:
+        - Lead
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/lead'
+    put:
+      description: Atualizar dados de um Lead
+      tags:
+        - Lead
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      operationId: atualizaLead
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/leadRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/leadResponse'
+    delete:
+      description: Deletar um lead
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      tags:
+        - Lead
+      responses:
+        '200':
+          description: OK
+  /leads/sort/name:
+    get:
+      description: Listar todos os Leads ordernado por nome
+      tags:
+        - Lead
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/leadsAllResponse'
+
+  /leads/sort/lastname:
+    get:
+      description: Listar todos os Leads ordernado por sobrenome
+      tags:
+        - Lead
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/leadsAllResponse'
+
+components:
+  schemas:
+    leadsAllResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/lead'
+
+    leadRequest:
+      type: object
+      properties:
+        nome:
+          type: string
+        sobrenome:
+          type: string
+        data_nascimento:
+          type: string
+          example: 'YYYY-mm-dd'
+        telefone:
+          type: string
+          example: '11999999999'
+
+    leadResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        nome:
+          type: string
+        sobrenome:
+          type: string
+        data_nascimento:
+          type: string
+          example: 'YYYY-mm-dd'
+        telefone:
+          type: string
+          example: '11999999999'
+    lead:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        nome:
+          type: string
+        sobrenome:
+          type: string
+        data_nascimento:
+          type: string
+          example: 'YYYY-mm-dd'
+        telefone:
+          type: string
+          example: '11999999999'
