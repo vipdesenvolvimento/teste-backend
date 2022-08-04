@@ -14,6 +14,17 @@ mvn spring-boot:run
 ```
 o projeto irá compilar e rodar na porta 8080.
 
+ou em Docker
+```
+mvn package
+```
+para criar o arquivo .jar
+
+```
+docker build -t backend .
+docker run -dp 8080:8080 backend
+```
+
 a documentação das APIs se encontra no arquivo: documentacaoApi.yaml que pode ser aberto através do site do Swagger: https://editor.swagger.io/ .
 
 <br>
