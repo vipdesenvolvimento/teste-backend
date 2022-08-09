@@ -1,9 +1,11 @@
 package com.vipdev.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -23,6 +25,7 @@ public class Lead {
 
     private String nome;
     private String sobrenome;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate data_nascimento;
     private String telefone;
 }
